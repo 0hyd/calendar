@@ -39,21 +39,29 @@ h1 {
     font-weight: bold;
 }
 
+.control-group span {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    line-height: 1;
+}
+
 #calendar-month-input {
-	max-width: 70px;
+	width: 82px;
 }
 
 #calendar-year-input {
-	max-width: 85px;
+	width: 104px;
 }
 
 .control-group input {
     height: 44px;
-    padding: 0 12px;
+    padding: 0 0px 0 10px;
     border: 1px solid #d8dfeb;
     border-radius: 8px;
+    background-color: #edf4ff;
     color: #2f5ea8;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     box-sizing: border-box;
@@ -73,17 +81,30 @@ h1 {
     cursor: pointer;
 }
 
-.calendar-controls span {
-	justify-content: center;
-}
 
 .control-group input:focus {
     outline: 2px solid #bfd7ff;
     border-color: #7fb3ff;
 }
 
+.control-group input[type="number"] {
+    appearance: auto;
+    direction: rtl;
+}
+
+.control-group input[type="number"]::-webkit-inner-spin-button,
+.control-group input[type="number"]::-webkit-outer-spin-button {
+    min-height: 38px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
 #today-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 72px;
+    line-height: 1;
     font-size: 18px;
 }
 

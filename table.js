@@ -100,17 +100,17 @@ function updateCalendar(year, month) {
 
 function applyInputValues() {
     const inputYear = Number(yearInput.value);
-    const inputMonth = Number(monthInput.value);
+    const inputMonth = Number(monthInput.value - 1);
     
-    if (!Number.isInteger(inputYear) || inputYear < 1)
+    if (!Number.isInteger(inputYear) || inputYear < 1 || inputYear > 9999)
     {
         yearInput.value = currentYear;
         return;
     }
 
-    if (!Number.isInteger(inputMonth) || inputMonth <1 || inputMonth > 12)
+    if (!Number.isInteger(inputMonth) || inputMonth < 0 || inputMonth > 11)
     {
-        monthInput.value = currentMonth;
+        monthInput.value = currentMonth + 1;
         return;
     }
 
