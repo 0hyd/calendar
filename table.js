@@ -1,0 +1,178 @@
+const calendarBody = document.querySelector("#calendar-body");
+
+// 月份年份移动
+const yearInput = document.querySelector("#calendar-year-input");
+const monthInput = document.querySelector("#calendar-month-input");
+const prevMonthButton = document.querySelector("#prev-month");
+const nextMonthButton = document.querySelector("#next-month");
+const prevYearButton = document.querySelector("#prev-year");
+const nextYearButton = document.querySelector("#next-year");
+const todayButton = document.querySelector("#today-button");
+
+const todayDate = new Date();
+
+let currentYear = todayDate.getFullYear();
+let currentMonth = todayDate.getMonth();
+let selectedDay = null;
+
+function renderCalendar(year, month) {
+    yearInput.value = year;
+    monthInput.value = month + 1;
+    calendarBody.innerHTML = "";
+
+    // getDay() 默认是：周日 0，周一 1 ... 周六 6。
+    // 你的表头是“周一到周日”，所以要把周日挪到最后一列。
+    const firstDay = new Date(year, month, 1);
+    const startDay = (firstDay.getDay() + 6) % 7;
+
+    // 下个月的第 0 天，就是这个月的最后一天。
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const isCurrentMonth =
+        todayDate.getFullYear() === year && todayDate.getMonth() === month;
+    const today = isCurrentMonth ? todayDate.getDate() : null;
+    const cells = [];
+
+    // 前面的空白占位格。
+    for (let i = 0; i < startDay; i++) {
+        cells.push({ text: "", className: "empty" });
+    }
+
+    // 把 1 到当月最后一天按顺序放进数组。
+    for (let day = 1; day <= totalDays; day++) {
+        let className = "";
+        const weekIndex = cells.length % 7;
+
+        // 现在第 5、6 列分别是周六和周日。
+        if (weekIndex === 5 || weekIndex === 6) {
+            className = "weekend";
+        }
+
+        if (day === today) {
+            className = className ? className + " today" : "today";
+        }
+
+        if (
+            selectedDay &&
+            selectedDay.getFullYear() === year &&
+            selectedDay.getMonth() === month &&
+            selectedDay.getDate() === day
+        ) {
+            className = className ? className + " selected" : "selected";
+        }
+
+        cells.push({ text: day, className });
+    }
+
+    // 最后一行补满 7 个格子。
+    while (cells.length % 7 !== 0) {
+        cells.push({ text: "", className: "empty" });
+    }
+
+    // 每 7 个格子组成一行，再写回 tbody。
+    for (let i = 0; i < cells.length; i += 7) {
+        const row = document.createElement("tr");
+        const weekCells = cells.slice(i, i + 7);
+
+        for (const cellData of weekCells) {
+            const cell = document.createElement("td");
+
+            cell.textContent = cellData.text;
+
+            if (cellData.className) {
+                cell.className = cellData.className;
+            }
+
+            if (!cell.classList.contains("empty")) {
+                cell.addEventListener("click", function () {
+                    selectedDay = new Date(currentYear, currentMonth, Number(cellData.text));
+                    renderCalendar(currentYear, currentMonth);
+                });
+            }
+
+            row.appendChild(cell);
+        }
+
+        calendarBody.appendChild(row);
+    }
+}
+
+function updateCalendar(year, month) {
+    currentYear = year;
+    currentMonth = month;
+    renderCalendar(currentYear, currentMonth);
+}
+
+function applyInputValues() {
+    const inputYear = Number(yearInput.value);
+    const inputMonth = Number(monthInput.value);
+
+    if (!Number.isInteger(inputYear) || inputYear < 1) {
+        yearInput.value = currentYear;
+        return;
+    }
+
+    if (!Number.isInteger(inputMonth) || inputMonth < 1 || inputMonth > 12) {
+        monthInput.value = currentMonth + 1;
+        return;
+    }
+
+    updateCalendar(inputYear, inputMonth - 1);
+}
+
+renderCalendar(currentYear, currentMonth);
+
+prevMonthButton.addEventListener("click", function () {
+    let nextYear = currentYear;
+    let nextMonth = currentMonth - 1;
+
+    if (nextMonth < 0) {
+        nextMonth = 11;
+        nextYear--;
+    }
+
+    updateCalendar(nextYear, nextMonth);
+});
+
+nextMonthButton.addEventListener("click", function () {
+    let nextYear = currentYear;
+    let nextMonth = currentMonth + 1;
+
+    if (nextMonth > 11) {
+        nextMonth = 0;
+        nextYear++;
+    }
+
+    updateCalendar(nextYear, nextMonth);
+});
+
+prevYearButton.addEventListener("click", function () {
+    updateCalendar(currentYear - 1, currentMonth);
+});
+
+nextYearButton.addEventListener("click", function () {
+    updateCalendar(currentYear + 1, currentMonth);
+});
+
+todayButton.addEventListener("click", function () {
+    selectedDay = new Date(
+        todayDate.getFullYear(),
+        todayDate.getMonth(),
+        todayDate.getDate()
+    );
+    updateCalendar(todayDate.getFullYear(), todayDate.getMonth());
+});
+
+yearInput.addEventListener("change", applyInputValues);
+monthInput.addEventListener("change", applyInputValues);
+
+yearInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        applyInputValues();
+    }
+});
+
+monthInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        applyInputValues();
+    }
+});
