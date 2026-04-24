@@ -3,10 +3,6 @@ const calendarBody = document.querySelector("#calendar-body");
 // 月份年份移动
 const yearInput = document.querySelector("#calendar-year-input");
 const monthInput = document.querySelector("#calendar-month-input");
-const prevMonthButton = document.querySelector("#prev-month");
-const nextMonthButton = document.querySelector("#next-month");
-const prevYearButton = document.querySelector("#prev-year");
-const nextYearButton = document.querySelector("#next-year");
 const todayButton = document.querySelector("#today-button");
 
 const todayDate = new Date();
@@ -120,38 +116,6 @@ function applyInputValues() {
 }
 
 renderCalendar(currentYear, currentMonth);
-
-prevMonthButton.addEventListener("click", function () {
-    let nextYear = currentYear;
-    let nextMonth = currentMonth - 1;
-
-    if (nextMonth < 0) {
-        nextMonth = 11;
-        nextYear--;
-    }
-
-    updateCalendar(nextYear, nextMonth);
-});
-
-nextMonthButton.addEventListener("click", function () {
-    let nextYear = currentYear;
-    let nextMonth = currentMonth + 1;
-
-    if (nextMonth > 11) {
-        nextMonth = 0;
-        nextYear++;
-    }
-
-    updateCalendar(nextYear, nextMonth);
-});
-
-prevYearButton.addEventListener("click", function () {
-    updateCalendar(currentYear - 1, currentMonth);
-});
-
-nextYearButton.addEventListener("click", function () {
-    updateCalendar(currentYear + 1, currentMonth);
-});
 
 todayButton.addEventListener("click", function () {
     selectedDay = new Date(
