@@ -60,7 +60,7 @@ function renderCalendar(year, month) {
     }
 
     // 最后一行补满 7 个格子。
-    while (cells.length % 7 !== 0) {
+    while (cells.length < 42) {
         cells.push({ text: "", className: "empty" });
     }
 
@@ -101,18 +101,20 @@ function updateCalendar(year, month) {
 function applyInputValues() {
     const inputYear = Number(yearInput.value);
     const inputMonth = Number(monthInput.value);
-
-    if (!Number.isInteger(inputYear) || inputYear < 1) {
+    
+    if (!Number.isInteger(inputYear) || inputYear < 1)
+    {
         yearInput.value = currentYear;
         return;
     }
 
-    if (!Number.isInteger(inputMonth) || inputMonth < 1 || inputMonth > 12) {
-        monthInput.value = currentMonth + 1;
+    if (!Number.isInteger(inputMonth) || inputMonth <1 || inputMonth > 12)
+    {
+        monthInput.value = currentMonth;
         return;
     }
 
-    updateCalendar(inputYear, inputMonth - 1);
+    updateCalendar(inputYear, inputMonth);
 }
 
 renderCalendar(currentYear, currentMonth);
@@ -126,6 +128,7 @@ todayButton.addEventListener("click", function () {
     updateCalendar(todayDate.getFullYear(), todayDate.getMonth());
 });
 
+// 检测数值变化和按键响应
 yearInput.addEventListener("change", applyInputValues);
 monthInput.addEventListener("change", applyInputValues);
 

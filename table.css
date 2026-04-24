@@ -6,8 +6,8 @@ body {
 
 main {
 	max-width: 720px;
-	margin: 40px auto;
-	padding: 32px;
+	margin: 30px auto;
+	padding: 16px;
 	background-color: #ffffff;
 	border-radius: 16px;
 	box-shadow: 0 12px 30px rgba(60, 90, 130, 0.12);
@@ -21,6 +21,7 @@ h1 {
 	font-size: 42px;
 }
 
+/* 日历内容控制 */
 .calendar-controls {
 	display: flex;
 	align-items: center;
@@ -38,6 +39,26 @@ h1 {
     font-weight: bold;
 }
 
+#calendar-month-input {
+	max-width: 70px;
+}
+
+#calendar-year-input {
+	max-width: 85px;
+}
+
+.control-group input {
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #d8dfeb;
+    border-radius: 8px;
+    color: #2f5ea8;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+}
+
 /* 通过height 统一高度 */
 .calendar-controls button {
     min-width: 52px;
@@ -50,19 +71,6 @@ h1 {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-}
-
-.control-group input {
-    width: 88px;
-    height: 44px;
-    padding: 0 12px;
-    border: 1px solid #d8dfeb;
-    border-radius: 8px;
-    color: #2f5ea8;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    box-sizing: border-box;
 }
 
 .calendar-controls span {
@@ -83,6 +91,7 @@ h1 {
 	background-color: #dceaff;
 }
 
+/* 日历表格样式 */
 .main-table {
 	margin: 0 auto;
 	border-collapse: collapse;
