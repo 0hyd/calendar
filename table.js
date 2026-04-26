@@ -55,8 +55,8 @@ function renderCalendar(year, month) {
         ) {
             className = className ? className + " selected" : "selected";
         }
-
-        cells.push({ text: day, className });
+        
+        cells.push({ text: day, className, festival: createFestivals(month, day) });
     }
 
     // 最后一行补满 7 个格子。
@@ -76,6 +76,16 @@ function renderCalendar(year, month) {
 
             if (cellData.className) {
                 cell.className = cellData.className;
+            }
+
+            // 加入节日
+            const festiveItem = document.createElement("div");
+
+            if (cellData.festival) {
+                festiveItem.textContent = cellData.festival;
+                console.log(cellData.festival);
+                festiveItem.className = "festival";
+                cell.appendChild(festiveItem);
             }
 
             if (!cell.classList.contains("empty")) {
