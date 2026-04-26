@@ -80,7 +80,10 @@ function renderCalendar(year, month) {
 
             if (!cell.classList.contains("empty")) {
                 cell.addEventListener("click", function () {
-                    selectedDay = new Date(currentYear, currentMonth, Number(cellData.text));
+                    selectedDay = new Date();
+                    selectedDay.setFullYear(currentYear);
+                    selectedDay.setMonth(currentMonth);
+                    selectedDay.setDate(cellData.text);
                     renderCalendar(currentYear, currentMonth);
                 });
             }
