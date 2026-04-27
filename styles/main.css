@@ -5,6 +5,7 @@ body {
 }
 
 main {
+	min-width: 600px;
 	max-width: 720px;
 	margin: 30px auto;
 	padding: 16px;
