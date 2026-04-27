@@ -1,7 +1,14 @@
 let solarFestivals = {};
 
 async function loadFestivalsData (year) {
-    const response = await fetch(`./data/${year}.json`);
+    let response = {};
+    if (year > 2026) {
+        const url = `https://unpkg.com/holiday-calendar/data/CN/${year}.json`;
+        response = await fetch(url);
+    }
+    else {
+        response = await fetch(`./data/${year}.json`);
+    }
     const festivalsData = await response.json();
 
     //清空数据
