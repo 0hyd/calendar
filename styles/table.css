@@ -93,20 +93,53 @@
 	width: 100%;
 	max-width: 100%;
 	overflow: hidden;
+	position: relative;
 }
 
+/* 自动滚动 */
 .main-table .festival-text {
-	display: block;
-	max-width: 100%;
-	width: 100%;
+	display: inline-block;
+	min-width: 100%;
+	width: max-content;
 	overflow: hidden;
 	white-space: nowrap;
 	box-sizing: border-box;
 	text-align: center;
+	will-change: transform;
+	animation: festival-marquee 3s linear;
 }
 
 .main-table .festival-text::-webkit-scrollbar {
   display: none;
+}
+
+/* 当鼠标悬停在节日上时再次进行滚动 */
+.main-table .festival:hover .festival-text {
+	animation: festival-marquee-hover 2s linear infinite;
+}
+
+@keyframes festival-marquee {
+	0%,
+	15% {
+		transform: translateX(0);
+	}
+
+	80%,
+	100% {
+		transform: translateX(calc(-100% + 80px));
+	}
+}
+
+@keyframes festival-marquee-hover {
+	0%,
+	10% {
+		transform: translateX(0);
+	}
+
+	90%,
+	100% {
+		transform: translateX(calc(-100% + 80px));
+	}
 }
 
 .main-table .festival-holiday {
