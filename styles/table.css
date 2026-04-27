@@ -9,14 +9,14 @@
 
 .main-table th,
 .main-table td {
-	width: 64px;
-	height: 64px;
+	width: 80px;
+	height: 80px;
 	border: 1px solid #d8dfeb;
 	text-align: center;
 }
 
 .main-table td {
-	padding-top: 8px;
+	padding-top: 6px;
     box-sizing: border-box;
     vertical-align: top;
 }
@@ -26,6 +26,11 @@
 	color: #2f5ea8;
 	font-weight: bold;
 	vertical-align: middle;
+}
+
+.main-table .week-number,
+.main-table .day-number {
+	font-size: 1.6em;
 }
 
 .main-table .weekend {
@@ -80,16 +85,54 @@
 
 /* 节日样式 */
 .main-table .festival {
-	font-size: 1.1em;
+	font-size: 1em;
 	margin-top: 4px;
+	line-height: 1.2;
+}
+
+.main-table .festival-holiday {
 	color: #d14b5a;
 }
 
-.main-table td:has(.festival) {
-	background-color: #fff1f1;
+.main-table .festival-workday {
+	color: #2f5ea8;
 }
 
-.main-table td:has(.workday) {
-	color: #000000;
-	background-color: #ffffff;
+.main-table .festival-holiday::after,
+.main-table .festival-workday::after {
+	display: block;
+	margin: 0 12px;
+	margin-top: 4px;
+	border-radius: 4px;
+	font-size: 0.8em;
+	color: #ffffff;
 }
+
+.main-table .festival-holiday::after {
+	content: "休";
+	background-color: #d14b5a;
+}
+
+.main-table .festival-workday::after {
+	content: "班";
+	background-color: #2f5ea8;
+}
+
+.main-table td:has(.festival-holiday):not(.selected) {
+	background-color: #fff1f1;
+
+}
+
+.main-table td:has(.festival-workday):not(.selected) {
+	background-color: #edf4ff;
+}
+
+.main-table td:has(.festival-holiday) {
+	color: #d14b5a;
+}
+
+.main-table td:has(.festival-workday) {
+	color: #000000;
+}
+
+

@@ -71,7 +71,10 @@ function renderCalendar(year, month) {
         for (const cellData of weekCells) {
             const cell = document.createElement("td");
 
-            cell.textContent = cellData.text;
+            const dayNumber = document.createElement("div");
+            dayNumber.textContent = cellData.text;
+            dayNumber.className = "day-number";
+            cell.appendChild(dayNumber);
 
             if (cellData.className) {
                 cell.className = cellData.className;
@@ -82,12 +85,15 @@ function renderCalendar(year, month) {
                 const festiveItem = document.createElement("div");
 
                 festiveItem.textContent = cellData.festival.name;
+                festiveItem.className = "festival";
+
                 if (cellData.festival.type === "public_holiday") {
-                    festiveItem.className = "festival";
+                    festiveItem.classList.add("festival-holiday");
                 }
                 else if (cellData.festival.type === "transfer_workday") {
-                    festiveItem.className = "workday";
+                    festiveItem.classList.add("festival-workday");
                 }
+
                 cell.appendChild(festiveItem);
             }
 

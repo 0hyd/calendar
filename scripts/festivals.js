@@ -8,7 +8,13 @@ async function loadFestivalsData (year) {
     solarFestivals = {};
 
     for (const data of festivalsData.dates) {
-        solarFestivals[data.date] = {name: data.name, type: data.type};
+        let festivalName = data.name;
+
+        if (data.type === "transfer_workday") {
+            festivalName = festivalName.replace(/补班$/, "");
+        }
+
+        solarFestivals[data.date] = {name: festivalName, type: data.type};
     }
 }
 
