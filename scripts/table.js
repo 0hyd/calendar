@@ -132,24 +132,46 @@ async function initCalendar() {
 }
 
 function applyInputValues() {
-    const inputYear = Number(yearInput.value);
-    const inputMonth = Number(monthInput.value - 1);
-    
-    if (!Number.isInteger(inputYear) || inputYear < 1 || inputYear > 9999)
-    {
+    let inputYear = Number(yearInput.value);
+    let inputMonth = Number(monthInput.value);
+
+    if (!Number.isInteger(inputYear)) {
         yearInput.value = currentYear;
         return;
     }
 
-    if (!Number.isInteger(inputMonth) || inputMonth < 0 || inputMonth > 11)
-    {
+    if (!Number.isInteger(inputMonth)) {
         monthInput.value = currentMonth + 1;
         return;
     }
 
-    updateCalendar(inputYear, inputMonth);
-}
+    if (inputMonth === 0) {
+        inputMonth = 12;
+        inputYear--;
+    }
+    else if (inputMonth === 13) {
+        inputMonth = 1;
+        inputYear++;
+    }
+    else if (inputMonth < 1) {
+        inputMonth = 1;
+    }
+    else if (inputMonth > 12) {
+        inputMonth = 12;
+    }
 
+    if (inputYear < 1) {
+        inputYear = 1;
+    }
+    else if (inputYear > 9999) {
+        inputYear = 9999;
+    }
+
+    yearInput.value = inputYear;
+    monthInput.value = inputMonth;
+
+    updateCalendar(inputYear, inputMonth - 1);
+}
 initCalendar();
 
 todayButton.addEventListener("click", function () {
