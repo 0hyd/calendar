@@ -81,8 +81,13 @@ function renderCalendar(year, month) {
             if (cellData.festival) {
                 const festiveItem = document.createElement("div");
 
-                festiveItem.textContent = cellData.festival;
-                festiveItem.className = "festival";
+                festiveItem.textContent = cellData.festival.name;
+                if (cellData.festival.type === "public_holiday") {
+                    festiveItem.className = "festival";
+                }
+                else if (cellData.festival.type === "transfer_workday") {
+                    festiveItem.className = "workday";
+                }
                 cell.appendChild(festiveItem);
             }
 
@@ -103,9 +108,20 @@ function renderCalendar(year, month) {
     }
 }
 
-function updateCalendar(year, month) {
+//切换年份再加载
+async function updateCalendar(year, month) {
+    if (currentYear !== year) {
+        await loadFestivalsData(year);
+    }
+
     currentYear = year;
     currentMonth = month;
+    renderCalendar(currentYear, currentMonth);
+}
+
+//首次加载
+async function initCalendar() {
+    await loadFestivalsData(currentYear); //等待加载节假日数据
     renderCalendar(currentYear, currentMonth);
 }
 
@@ -128,7 +144,7 @@ function applyInputValues() {
     updateCalendar(inputYear, inputMonth);
 }
 
-renderCalendar(currentYear, currentMonth);
+initCalendar();
 
 todayButton.addEventListener("click", function () {
     selectedDay = new Date(

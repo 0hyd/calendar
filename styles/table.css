@@ -79,13 +79,17 @@
 }
 
 /* 节日样式 */
-.festival {
+.main-table .festival {
 	font-size: 1.1em;
 	margin-top: 4px;
-	font-weight: bold;
 	color: #d14b5a;
 }
 
 .main-table td:has(.festival) {
 	background-color: #fff1f1;
+}
+
+.main-table td:has(.workday) {
+	color: #000000;
+	background-color: #ffffff;
 }
