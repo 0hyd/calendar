@@ -1,0 +1,90 @@
+/* 日历时间控制 */
+.calendar-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3c4a64;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.control-group span {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    line-height: 1;
+}
+
+#calendar-month-input {
+	width: 82px;
+}
+
+#calendar-year-input {
+	width: 104px;
+}
+
+.control-group input {
+    height: 44px;
+    padding: 0 0px 0 10px;
+    border: 1px solid #d8dfeb;
+    border-radius: 8px;
+    background-color: #edf4ff;
+    color: #2f5ea8;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 通过height 统一高度 */
+.calendar-controls button {
+    min-width: 52px;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #d8dfeb;
+    border-radius: 8px;
+    background-color: #edf4ff;
+    color: #2f5ea8;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.control-group input:focus {
+    outline: 2px solid #bfd7ff;
+    border-color: #7fb3ff;
+}
+
+.control-group input[type="number"] {
+    appearance: auto;
+    direction: rtl;
+}
+
+.control-group input[type="number"]::-webkit-inner-spin-button,
+.control-group input[type="number"]::-webkit-outer-spin-button {
+    min-height: 38px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+#today-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    line-height: 1;
+    font-size: 18px;
+}
+
+.calendar-controls button:hover {
+	background-color: #dceaff;
+}

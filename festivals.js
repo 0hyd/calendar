@@ -1,20 +1,25 @@
-const solarFestivals = {
-    "01-01": "元旦",
-    "02-14": "情人节",
-    "03-08": "妇女节",
-    "05-01": "劳动节",
-    "06-01": "儿童节",
-    "09-10": "教师节",
-    "10-01": "国庆节",
-    "12-25": "圣诞节"
-};
+let solarFestivals = {name: "", type: ""};
 
+async function loadFestivalsData () {
+    const response = await fetch("./data/2026.json");
+    const festivalsData = await response.json();
 
-function createFestivals (month, day) {
-    const formDate = (month + 1).toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
-    if (solarFestivals[formDate]) {
-        return solarFestivals[formDate];
+    for (const data of festivalsData.dates) {
+        solarFestivals[data.date] = {name: data.name, type: data.type};
     }
-    return null;
 }
 
+loadFestivalsData();
+
+function getSolarFestival (year, month, day) {
+    const formDate =
+        year.toString().padStart(4, "0") + "-" + (month + 1).toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
+
+    if (solarFestivals[formDate]) {
+        if (solarFestivals[formDate].type === "public_holiday") {
+            return solarFestivals[formDate].name;
+        }
+    }
+
+    return null;
+}

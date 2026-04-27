@@ -55,8 +55,7 @@ function renderCalendar(year, month) {
         ) {
             className = className ? className + " selected" : "selected";
         }
-        
-        cells.push({ text: day, className, festival: createFestivals(month, day) });
+        cells.push({ text: day, className, festival: getSolarFestival(year, month, day) });
     }
 
     // 最后一行补满 7 个格子。
@@ -79,11 +78,10 @@ function renderCalendar(year, month) {
             }
 
             // 加入节日
-            const festiveItem = document.createElement("div");
-
             if (cellData.festival) {
+                const festiveItem = document.createElement("div");
+
                 festiveItem.textContent = cellData.festival;
-                console.log(cellData.festival);
                 festiveItem.className = "festival";
                 cell.appendChild(festiveItem);
             }
