@@ -110,7 +110,7 @@ function renderCalendar(year, month) {
 
 //切换年份再加载
 async function updateCalendar(year, month) {
-    if (currentYear !== year) {
+    if (currentYear !== year && year >=2000 && year <= new Date().getFullYear()) {
         await loadFestivalsData(year);
     }
 
