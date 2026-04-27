@@ -5,6 +5,8 @@
 	background-color: #ffffff;
 	border-radius: 12px;
 	overflow: hidden;
+	width: 560px;
+	table-layout: fixed;
 }
 
 .main-table th,
@@ -88,6 +90,23 @@
 	font-size: 1em;
 	margin-top: 4px;
 	line-height: 1.2;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.main-table .festival-text {
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.main-table .festival-text::-webkit-scrollbar {
+  display: none;
 }
 
 .main-table .festival-holiday {

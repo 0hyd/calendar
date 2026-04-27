@@ -83,9 +83,11 @@ function renderCalendar(year, month) {
             // 加入节日
             if (cellData.festival) {
                 const festiveItem = document.createElement("div");
+                const festivalText = document.createElement("span");
 
-                festiveItem.textContent = cellData.festival.name;
                 festiveItem.className = "festival";
+                festivalText.textContent = cellData.festival.name;
+                festivalText.className = "festival-text";
 
                 if (cellData.festival.type === "public_holiday") {
                     festiveItem.classList.add("festival-holiday");
@@ -94,6 +96,7 @@ function renderCalendar(year, month) {
                     festiveItem.classList.add("festival-workday");
                 }
 
+                festiveItem.appendChild(festivalText);
                 cell.appendChild(festiveItem);
             }
 
@@ -116,8 +119,13 @@ function renderCalendar(year, month) {
 
 //切换年份再加载
 async function updateCalendar(year, month) {
-    if (currentYear !== year && year >=2000 && year <= new Date().getFullYear()) {
-        await loadFestivalsData(year);
+    if (currentYear !== year ) {
+        if (year >2000 && year <= new Date().getFullYear()) {
+            await loadFestivalsData(year);
+        }
+        else {
+        solarFestivals = {};
+        }
     }
 
     currentYear = year;
