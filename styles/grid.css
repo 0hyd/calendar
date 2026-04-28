@@ -1,12 +1,13 @@
-/* 日历表格样式 */
+/* 日历网格样式 */
 #calendar {
+	--calendar-border: #d8dfeb;
 	margin: 0 auto;
-	border-collapse: collapse;
 	background-color: #ffffff;
 	border-radius: 12px;
 	overflow: hidden;
-	width: 560px;
-	table-layout: fixed;
+	width: 100%;
+	max-width: 560px;
+	border: 1px solid var(--calendar-border);
 }
 
 #calendar-header,
@@ -17,17 +18,23 @@
 
 #calendar-header .weekday,
 #calendar-grid .day-number {
-	width: 80px;
-	height: 80px;
-	font-size: 1.6em;
-	border: 1px solid #d8dfeb;
-	text-align: center;
-	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
 	aspect-ratio: 1 / 1;
+	border-right: 1px solid var(--calendar-border);
+	border-bottom: 1px solid var(--calendar-border);
 }
 
 #calendar-grid .day-number {
-	padding-top: 6px;
+	position: relative;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	align-items: start;
+	justify-items: center;
+	padding: clamp(4px, 0.8vw, 6px);
+	font-size: clamp(1rem, 2.8vw, 1.5rem);
+	cursor: pointer;
+	overflow: hidden;
 }
 
 #calendar-header .weekday {
@@ -37,6 +44,21 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+}
+
+#calendar-header .weekday:nth-child(7),
+#calendar-grid .day-number:nth-child(7n) {
+	border-right: 0;
+}
+
+#calendar-grid .day-number:nth-last-child(-n + 7) {
+	border-bottom: 0;
+}
+
+#calendar-grid .day-label {
+	line-height: 1;
+	pointer-events: none;
 }
 
 #calendar .weekend {
@@ -44,21 +66,15 @@
 	background-color: #fff1f1;
 }
 
-/* 当鼠标移到星期表头时，高亮这一整列的普通日期格 */
-#calendar:has(#th1:hover) tbody tr td:nth-child(1):not(.empty):not(.today):not(.selected),
-#calendar:has(#th2:hover) tbody tr td:nth-child(2):not(.empty):not(.today):not(.selected),
-#calendar:has(#th3:hover) tbody tr td:nth-child(3):not(.empty):not(.today):not(.selected),
-#calendar:has(#th4:hover) tbody tr td:nth-child(4):not(.empty):not(.today):not(.selected),
-#calendar:has(#th5:hover) tbody tr td:nth-child(5):not(.empty):not(.today):not(.selected),
-#calendar:has(#th6:hover) tbody tr td:nth-child(6):not(.empty):not(.today):not(.selected),
-#calendar:has(#th7:hover) tbody tr td:nth-child(7):not(.empty):not(.today):not(.selected),
-#th1:hover,
-#th2:hover,
-#th3:hover,
-#th4:hover,
-#th5:hover,
-#th6:hover,
-#th7:hover {
+
+#calendar:has(.weekday[data-column="0"]:hover) .day-number[data-column="0"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="1"]:hover) .day-number[data-column="1"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="2"]:hover) .day-number[data-column="2"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="3"]:hover) .day-number[data-column="3"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="4"]:hover) .day-number[data-column="4"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="5"]:hover) .day-number[data-column="5"]:not(.empty):not(.today):not(.selected),
+#calendar:has(.weekday[data-column="6"]:hover) .day-number[data-column="6"]:not(.empty):not(.today):not(.selected),
+#calendar-header .weekday:hover {
 	background-color: #cfe8cf;
 }
 
@@ -75,6 +91,10 @@
 	background-color: #eef1f5;
 }
 
+#calendar-grid .day-number.empty {
+	cursor: default;
+}
+
 #calendar-grid .day-number.today {
 	background-color: #ffd6a5;
 	font-weight: bold;
@@ -85,4 +105,24 @@
 	font-weight: bold;
 }
 
+@media (max-width: 640px) {
+	#calendar {
+		border-radius: 10px;
+	}
 
+	#calendar-header .weekday,
+	#calendar-grid .day-number {
+		font-size: clamp(0.9rem, 3.3vw, 1.1rem);
+	}
+
+	#calendar-grid .day-number {
+		padding: 4px 2px;
+
+		/* 星期自动调整，日期最小可以缩小到0,最大为一行 */
+		grid-template-rows: auto minmax(0, 1fr);
+	}
+
+	#calendar-grid .day-label {
+		font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+	}
+}

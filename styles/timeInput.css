@@ -3,9 +3,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 12px;
 	margin-bottom: 16px;
-    transform: scale(1.2);
 }
 
 .control-group {
@@ -25,11 +25,11 @@
 }
 
 #calendar-month-input {
-	width: 64px;
+	width: 72px;
 }
 
 #calendar-year-input {
-	width: 96px;
+	width: 104px;
 }
 
 .control-group input {
@@ -87,4 +87,44 @@
 
 .calendar-controls button:hover {
 	background-color: #dceaff;
+}
+
+@media (max-width: 640px) {
+	.calendar-controls {
+		gap: 10px;
+		margin-bottom: 14px;
+	}
+
+	.control-group {
+		gap: 6px;
+		font-size: 16px;
+	}
+
+	.control-group span {
+		height: 40px;
+	}
+
+	#calendar-year-input {
+		width: 88px;
+	}
+
+	#calendar-month-input {
+		width: 64px;
+	}
+
+	.control-group input,
+	.calendar-controls button {
+		height: 40px;
+		font-size: 16px;
+	}
+
+	.calendar-controls button {
+		min-width: 60px;
+		padding: 0 12px;
+	}
+
+	#today-button {
+		min-width: 64px;
+		font-size: 16px;
+	}
 }

@@ -1,17 +1,26 @@
-body {
-	margin: 0;
-	background-color: #f5f7fb;
-	font-family: Arial, sans-serif;
+/* 继承父元素的box-sizing */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
 }
 
 main {
-	min-width: 600px;
-	max-width: 720px;
-	margin: 30px auto;
-	padding: 16px;
+	width: min(100%, 720px);
+	box-sizing: border-box;
+	margin: 14px auto;
+	padding: 20px;
 	background-color: #ffffff;
 	border-radius: 16px;
 	box-shadow: 0 12px 30px rgba(60, 90, 130, 0.12);
+}
+
+body {
+	margin: 0;
+	padding: 16px;
+	box-sizing: border-box;
+	background-color: #f5f7fb;
+	font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -20,4 +29,21 @@ h1 {
 	color: #2f5ea8;
 	text-align: center;
 	font-size: 42px;
+}
+
+@media (max-width: 640px) {
+	body {
+		padding: 10px;
+	}
+
+	main {
+		margin: 0 auto;
+		padding: 14px;
+		border-radius: 14px;
+	}
+
+	h1 {
+		margin-bottom: 18px;
+		font-size: clamp(28px, 8vw, 36px);
+	}
 }

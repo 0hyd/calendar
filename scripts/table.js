@@ -64,15 +64,21 @@ function renderCalendar(year, month) {
     }
 
     // 每 7 个格子组成一行，再写回 tbody。
-    for (const cellData of cells) {
+    for (const [index, cellData] of cells.entries()) {
         const cell = document.createElement("div");
+        const dayLabel = document.createElement("span");
+        const columnIndex = index % 7;
 
-        cell.textContent = cellData.text;
         cell.className = "day-number";
+        cell.dataset.column = columnIndex;
+        dayLabel.className = "day-label";
+        dayLabel.textContent = cellData.text;
 
         if (cellData.className) {
             cell.className = cellData.className ? cellData.className + " " + cell.className : cell.className;
         }
+
+        cell.appendChild(dayLabel);
 
         // 加入节日
         if (cellData.festival) {

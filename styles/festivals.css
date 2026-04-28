@@ -1,58 +1,31 @@
 /* 节日样式 */
 #calendar-grid .festival {
-	font-size: 0.7em;
-	margin-top: 4px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 2px;
+	min-width: 0;
+	width: 100%;
+	padding: 0 2px;
+	font-size: 0.6em;
 	line-height: 1.1;
 	width: 100%;
 	max-width: 100%;
 	overflow: hidden;
-	position: relative;
 }
 
-/* 自动滚动 */
 #calendar-grid .festival-text {
-	display: inline-block;
-	min-width: 100%;
-	width: max-content;
-	overflow: hidden;
+	display: block;
+	width: 100%;
+	min-width: 0;
 	white-space: nowrap;
 	box-sizing: border-box;
 	text-align: center;
-	will-change: transform;
-	animation: festival-marquee 3s linear;
 }
 
 #calendar-grid .festival-text::-webkit-scrollbar {
   display: none;
-}
-
-/* 当鼠标悬停在节日上时再次进行滚动 */
-#calendar-grid .festival:hover .festival-text {
-	animation: festival-marquee-hover 2s linear infinite;
-}
-
-@keyframes festival-marquee {
-	0%,
-	15% {
-		transform: translateX(0);
-	}
-
-	80%,
-	100% {
-		transform: translateX(calc(-100% + 80px));
-	}
-}
-
-@keyframes festival-marquee-hover {
-	0%,
-	10% {
-		transform: translateX(0);
-	}
-
-	90%,
-	100% {
-		transform: translateX(calc(-100% + 80px));
-	}
 }
 
 #calendar-grid .festival-holiday {
@@ -65,10 +38,15 @@
 
 #calendar-grid .festival-holiday::after,
 #calendar-grid .festival-workday::after {
-	display: block;
-	margin: 0 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.5em;
+	height: 1.4em;
+	padding: 0 1.5em;
 	border-radius: 4px;
-	font-size: 0.6em;
+	font-size: 0.8em;
+	line-height: 1;
 	color: #ffffff;
 }
 
@@ -84,7 +62,6 @@
 
 #calendar-grid .day-number:has(.festival-holiday):not(.selected) {
 	background-color: #fff1f1;
-
 }
 
 #calendar-grid .day-number:has(.festival-workday):not(.selected) {
@@ -97,4 +74,58 @@
 
 #calendar-grid .day-number:has(.festival-workday) {
 	color: #000000;
+}
+
+
+#calendar-grid .festival {
+	font-size: 0.7em;
+}
+
+#calendar-grid .festival-text {
+	will-change: transform;
+	animation: festival-marquee 3s linear;
+}
+
+#calendar-grid .festival:hover .festival-text {
+	animation: festival-marquee-hover 2s linear infinite;
+}
+
+@keyframes festival-marquee {
+	0%,
+	15% {
+		transform: translateX(0);
+	}
+
+	80%,
+	100% {
+		transform: translateX(-90%);
+	}
+}
+
+@keyframes festival-marquee-hover {
+	0%,
+	10% {
+		transform: translateX(0);
+	}
+
+	90%,
+	100% {
+		transform: translateX(calc(-90%));
+	}
+}
+
+/* 移动端 */
+@media (max-width: 640px) {
+	#calendar-grid .festival {
+		font-size: 0.7em;
+		gap: 1px;
+	}
+
+	#calendar-grid .festival-holiday::after,
+	#calendar-grid .festival-workday::after {
+		min-width: 1.35em;
+		height: 1.3em;
+		font-size: 0.6em;
+		border-radius: 2px;
+	}
 }
