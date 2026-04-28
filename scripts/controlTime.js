@@ -118,6 +118,8 @@ todayButton.addEventListener("click", function () {
         todayDate.getMonth(),
         todayDate.getDate()
     );
+    inputYear = todayDate.getFullYear();
+    inputMonth = todayDate.getMonth() + 1;
     applyInputValues();
     updateCalendar(todayDate.getFullYear(), todayDate.getMonth());
 });

@@ -39,11 +39,11 @@
 }
 
 #calendar-year-input {
-	width: 48px;
+	width: 52px;
 }
 
 #calendar-month-input {
-	width: 24px;
+	width: 34px;
 }
 
 .control-group span,
@@ -60,7 +60,7 @@
 
 .control-group span {
 	border-left: none;
-	padding: 0 8px 0 2px;
+	padding: 0 8px 0 4px;
     display: flex;
     align-items: center;
 	text-align: left;
@@ -100,7 +100,7 @@
 .control-group input[type="number"] {
 	appearance: textfield;
 	border-right: none;
-	text-align: right;
+	text-align: center;
 	padding: 0 2px 0 6px;
 }
 
@@ -182,7 +182,7 @@
 	}
 
 	#calendar-month-input {
-		width: 24px;
+		width: 32px;
 	}
 
 	#today-button {
