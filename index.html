@@ -12,19 +12,29 @@
 	<body>
         <main>
             <h1>我的日历</h1>
-            <div class="calendar-controls">
-                <label class="control-group">
-                    <input type="number" id="calendar-year-input" min="1" max="9999" step="1">
-                    <span>年</span>
-                </label>
-                <label class="control-group">
-                    <input type="number" id="calendar-month-input" min="0" max="13" step="1">
-					<span>月</span>
-                </label>
+            <div id="calendar-controls">
+				<div id="year-month-row">
+					<div class="start-time">
+						<button type="button" id="add-year">▲</button>
+						<button type="button" id="decrease-year">▼</button>
+					</div>
+					<label class="control-group">
+						<input type="number" id="calendar-year-input" min="1" max="9999" step="1">
+						<span>年</span>
+					</label>
+					<div class="start-time">
+						<button type="button" id="add-month">▲</button>
+						<button type="button" id="decrease-month">▼</button>
+					</div>
+					<label class="control-group">
+						<input type="number" id="calendar-month-input" min="1" max="12" step="1">
+						<span>月</span>
+					</label>
+				</div>
                 <button type="button" id="today-button">今天</button>
             </div>
             <div id="calendar">
-			<div id="calendar-header">
+				<div id="calendar-header">
 					<div class="weekday" data-column="0">一</div>
 					<div class="weekday" data-column="1">二</div>
 					<div class="weekday" data-column="2">三</div>
@@ -39,6 +49,8 @@
 			</div>
 		</main>
 		<script src="./scripts/festivals.js"></script>
-		<script src="./scripts/table.js"></script>
+		<script src="./scripts/writeCalendar.js"></script>
+		<script src="./scripts/renderCalendar.js"></script>
+		<script src="./scripts/controlTime.js"></script>
 	</body>
 </html>

@@ -1,72 +1,107 @@
 /* 日历时间控制 */
-.calendar-controls {
+#calendar-controls {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 12px;
+	gap: 24px;
 	margin-bottom: 16px;
+}
+
+/* 控制间距 */
+#year-month-row {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0;
+}
+
+#year-month-row > label.control-group:nth-child(2) {
+    margin-right: 24px;
+}
+
+.start-time {
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+	flex-shrink: 0;
 }
 
 .control-group {
     display: flex;
     align-items: center;
-    gap: 8px;
     color: #3c4a64;
     font-size: 18px;
     font-weight: bold;
-}
-
-.control-group span {
-    display: flex;
-    align-items: center;
-    height: 44px;
-    line-height: 1;
-}
-
-#calendar-month-input {
-	width: 72px;
+	position: relative;
+	border-radius: 0 8px 8px 0;
 }
 
 #calendar-year-input {
-	width: 104px;
+	width: 48px;
 }
 
-.control-group input {
+#calendar-month-input {
+	width: 24px;
+}
+
+.control-group span,
+.control-group input[type="number"] {
     height: 44px;
-    padding: 0 0px 0 10px;
     border: 1px solid #d8dfeb;
-    border-radius: 8px;
     background-color: #edf4ff;
     color: #2f5ea8;
     font-size: 18px;
     font-weight: bold;
-    text-align: center;
     box-sizing: border-box;
+    margin-left: -1px;
+}
+
+.control-group span {
+	border-left: none;
+	padding: 0 8px 0 2px;
+    display: flex;
+    align-items: center;
+	text-align: left;
+    height: 44px;
+    line-height: 1;
+	border-radius: 0 8px 8px 0;
+}
+
+.control-group input[type="number"]::-webkit-outer-spin-button,
+.control-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* 通过height 统一高度 */
-.calendar-controls button {
-    min-width: 52px;
-    height: 44px;
-    padding: 0 14px;
+#calendar-controls button {
     border: 1px solid #d8dfeb;
-    border-radius: 8px;
     background-color: #edf4ff;
     color: #2f5ea8;
-    font-size: 20px;
-    font-weight: bold;
     cursor: pointer;
 }
 
-
 .control-group input:focus {
-    outline: 2px solid #bfd7ff;
-    border-color: #7fb3ff;
+	outline: none;
+    box-shadow: none;
+}
+
+.control-group:has(input:focus) {
+	box-shadow: 0 0 0 2px #bfd7ff;
+}
+
+.control-group:has(input:focus) input,
+.control-group:has(input:focus) span {
+	border-color: #7fb3ff;
 }
 
 .control-group input[type="number"] {
-    appearance: auto;
+	appearance: textfield;
+	border-right: none;
+	text-align: right;
+	padding: 0 2px 0 6px;
 }
 
 .control-group input[type="number"]::-webkit-inner-spin-button,
@@ -76,49 +111,90 @@
     cursor: pointer;
 }
 
+#calendar-controls .start-time button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 32px;
+	flex: 1 1 50%;
+	padding: 0;
+	line-height: 1;
+	border-radius: 0;
+}
+
+#calendar-controls .start-time button:first-child {
+	border-radius: 8px 0 0 0;
+	border-bottom: none;
+}
+
+#calendar-controls .start-time button:last-child {
+	border-radius: 0 0 0 8px;
+}
+
 #today-button {
+    min-width: 52px;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 72px;
     line-height: 1;
+    font-weight: bold;
     font-size: 18px;
 }
 
-.calendar-controls button:hover {
+#calendar-controls button:hover {
 	background-color: #dceaff;
 }
 
 @media (max-width: 640px) {
-	.calendar-controls {
+	#calendar-controls {
 		gap: 10px;
 		margin-bottom: 14px;
 	}
 
+	#year-month-row > label.control-group:nth-child(2) {
+		margin-right: 16px;
+	}
+
 	.control-group {
-		gap: 6px;
 		font-size: 16px;
+	}
+
+	.control-group span,
+	.control-group input[type="number"] {
+		height: 40px;
+		font-size: 16px;
+	}
+
+	.control-group input[type="number"] {
+		padding: 0 1px 0 4px;
 	}
 
 	.control-group span {
-		height: 40px;
+		padding: 0 6px 0 1px;
 	}
 
 	#calendar-year-input {
-		width: 88px;
+		width: 48px;
 	}
 
 	#calendar-month-input {
-		width: 64px;
+		width: 24px;
 	}
 
-	.control-group input,
-	.calendar-controls button {
+	#today-button {
 		height: 40px;
 		font-size: 16px;
 	}
 
-	.calendar-controls button {
+	#calendar-controls .start-time button {
+		min-width: 28px;
+	}
+
+	#today-button {
 		min-width: 60px;
 		padding: 0 12px;
 	}
