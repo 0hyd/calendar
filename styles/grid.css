@@ -1,0 +1,88 @@
+/* 日历表格样式 */
+#calendar {
+	margin: 0 auto;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	width: 560px;
+	table-layout: fixed;
+}
+
+#calendar-header,
+#calendar-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+
+#calendar-header .weekday,
+#calendar-grid .day-number {
+	width: 80px;
+	height: 80px;
+	font-size: 1.6em;
+	border: 1px solid #d8dfeb;
+	text-align: center;
+	box-sizing: border-box;
+	aspect-ratio: 1 / 1;
+}
+
+#calendar-grid .day-number {
+	padding-top: 6px;
+}
+
+#calendar-header .weekday {
+	background-color: #edf4ff;
+	color: #2f5ea8;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#calendar .weekend {
+	color: #d14b5a;
+	background-color: #fff1f1;
+}
+
+/* 当鼠标移到星期表头时，高亮这一整列的普通日期格 */
+#calendar:has(#th1:hover) tbody tr td:nth-child(1):not(.empty):not(.today):not(.selected),
+#calendar:has(#th2:hover) tbody tr td:nth-child(2):not(.empty):not(.today):not(.selected),
+#calendar:has(#th3:hover) tbody tr td:nth-child(3):not(.empty):not(.today):not(.selected),
+#calendar:has(#th4:hover) tbody tr td:nth-child(4):not(.empty):not(.today):not(.selected),
+#calendar:has(#th5:hover) tbody tr td:nth-child(5):not(.empty):not(.today):not(.selected),
+#calendar:has(#th6:hover) tbody tr td:nth-child(6):not(.empty):not(.today):not(.selected),
+#calendar:has(#th7:hover) tbody tr td:nth-child(7):not(.empty):not(.today):not(.selected),
+#th1:hover,
+#th2:hover,
+#th3:hover,
+#th4:hover,
+#th5:hover,
+#th6:hover,
+#th7:hover {
+	background-color: #cfe8cf;
+}
+
+#calendar-grid .day-number:hover:not(.empty):not(.today):not(.selected) {
+	background-color: #fff3b0;
+}
+
+/* 空白格保持弱化样式，不参与普通日期的 hover */
+#calendar-grid .day-number.empty {
+	background-color: #eef1f5;
+}
+
+#calendar-grid .day-number.empty:hover {
+	background-color: #eef1f5;
+}
+
+#calendar-grid .day-number.today {
+	background-color: #ffd6a5;
+	font-weight: bold;
+}
+
+#calendar-grid .day-number.selected {
+	background-color: #8ecae6;
+	font-weight: bold;
+}
+
+

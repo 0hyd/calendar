@@ -1,0 +1,100 @@
+/* 节日样式 */
+#calendar-grid .festival {
+	font-size: 0.7em;
+	margin-top: 4px;
+	line-height: 1.1;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+/* 自动滚动 */
+#calendar-grid .festival-text {
+	display: inline-block;
+	min-width: 100%;
+	width: max-content;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
+	text-align: center;
+	will-change: transform;
+	animation: festival-marquee 3s linear;
+}
+
+#calendar-grid .festival-text::-webkit-scrollbar {
+  display: none;
+}
+
+/* 当鼠标悬停在节日上时再次进行滚动 */
+#calendar-grid .festival:hover .festival-text {
+	animation: festival-marquee-hover 2s linear infinite;
+}
+
+@keyframes festival-marquee {
+	0%,
+	15% {
+		transform: translateX(0);
+	}
+
+	80%,
+	100% {
+		transform: translateX(calc(-100% + 80px));
+	}
+}
+
+@keyframes festival-marquee-hover {
+	0%,
+	10% {
+		transform: translateX(0);
+	}
+
+	90%,
+	100% {
+		transform: translateX(calc(-100% + 80px));
+	}
+}
+
+#calendar-grid .festival-holiday {
+	color: #d14b5a;
+}
+
+#calendar-grid .festival-workday {
+	color: #2f5ea8;
+}
+
+#calendar-grid .festival-holiday::after,
+#calendar-grid .festival-workday::after {
+	display: block;
+	margin: 0 12px;
+	border-radius: 4px;
+	font-size: 0.6em;
+	color: #ffffff;
+}
+
+#calendar-grid .festival-holiday::after {
+	content: "休";
+	background-color: #d14b5a;
+}
+
+#calendar-grid .festival-workday::after {
+	content: "班";
+	background-color: #2f5ea8;
+}
+
+#calendar-grid .day-number:has(.festival-holiday):not(.selected) {
+	background-color: #fff1f1;
+
+}
+
+#calendar-grid .day-number:has(.festival-workday):not(.selected) {
+	background-color: #edf4ff;
+}
+
+#calendar-grid .day-number:has(.festival-holiday) {
+	color: #d14b5a;
+}
+
+#calendar-grid .day-number:has(.festival-workday) {
+	color: #000000;
+}

@@ -25,11 +25,11 @@
 }
 
 #calendar-month-input {
-	width: 82px;
+	width: 64px;
 }
 
 #calendar-year-input {
-	width: 104px;
+	width: 96px;
 }
 
 .control-group input {
@@ -67,7 +67,6 @@
 
 .control-group input[type="number"] {
     appearance: auto;
-    direction: rtl;
 }
 
 .control-group input[type="number"]::-webkit-inner-spin-button,
