@@ -1,8 +1,9 @@
 // 月份年份移动
-const yearInput = document.querySelector("#calendar-year-input");
-const monthInput = document.querySelector("#calendar-month-input");
 let inputYear = currentYear;
 let inputMonth = currentMonth;
+const yearInput = document.querySelector("#calendar-year-input");
+const monthInput = document.querySelector("#calendar-month-input");
+
 
 const todayButton = document.querySelector("#today-button");
 
@@ -24,16 +25,17 @@ initCalendar();
 //切换年份再加载
 async function updateCalendar(year, month) {
     if (currentYear !== year ) {
-        if (year >2000 && year <= new Date().getFullYear()) {
+        if (year >= 2000 && year <= new Date().getFullYear()) {
             await loadFestivalsData(year);
         }
         else {
         solarFestivals = {};
         }
     }
-
     currentYear = year;
     currentMonth = month;
+    yearInput.value = currentYear;
+    monthInput.value = currentMonth + 1;
     renderCalendar(currentYear, currentMonth);
 }
 
@@ -47,21 +49,12 @@ function applyInputValues() {
         return;
     }
 
-    if (inputMonth === 0) {
-        inputMonth = 12;
-        inputYear--;
+    if (inputMonth < 0) {
+        inputMonth = currentMonth;
     }
-    else if (inputMonth === 13) {
-        inputMonth = 1;
-        inputYear++;
+    else if (inputMonth > 11) {
+        inputMonth = currentMonth;
     }
-    else if (inputMonth < 1) {
-        inputMonth = 1;
-    }
-    else if (inputMonth > 12) {
-        inputMonth = 12;
-    }
-
     if (inputYear < 1) {
         inputYear = 1;
     }
@@ -69,16 +62,13 @@ function applyInputValues() {
         inputYear = 9999;
     }
 
-    yearInput.value = inputYear;
-    monthInput.value = inputMonth;
-
-    updateCalendar(inputYear, inputMonth - 1);
+    updateCalendar(inputYear, inputMonth);
 }
 
 // 检测数值变化和按键响应
 function handleInputSubmit() {
     inputYear = Number(yearInput.value);
-    inputMonth = Number(monthInput.value);
+    inputMonth = Number(monthInput.value) - 1;
     applyInputValues();
 }
 
@@ -96,19 +86,31 @@ monthInput.addEventListener("keydown", handleEnterSubmit);
 
 //上下增加日期
 addYear.addEventListener("click", function () {
-    inputYear++;
+    inputMonth = currentMonth;
+    inputYear = currentYear + 1;
     applyInputValues();
 });
 decreaseYear.addEventListener("click", function () {
-    inputYear--;
+    inputMonth = currentMonth;
+    inputYear = currentYear - 1;
     applyInputValues();
 });
 addMonth.addEventListener("click", function () {
-    inputMonth++;
+    inputMonth = currentMonth + 1;
+    inputYear = currentYear;
+    if (inputMonth === 12) {
+        inputMonth = 0;
+        inputYear++;
+    }
     applyInputValues();
 });
 decreaseMonth.addEventListener("click", function () {
-    inputMonth--;
+    inputMonth = currentMonth - 1;
+    inputYear = currentYear;
+    if (inputMonth === -1) {
+        inputMonth = 11;
+        inputYear--;
+    }
     applyInputValues();
 });
 
@@ -118,8 +120,5 @@ todayButton.addEventListener("click", function () {
         todayDate.getMonth(),
         todayDate.getDate()
     );
-    inputYear = todayDate.getFullYear();
-    inputMonth = todayDate.getMonth() + 1;
-    applyInputValues();
     updateCalendar(todayDate.getFullYear(), todayDate.getMonth());
 });

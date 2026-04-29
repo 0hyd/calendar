@@ -2,7 +2,7 @@ const calendarBody = document.querySelector("#calendar-grid");
 const todayDate = new Date();
 
 let currentYear = todayDate.getFullYear();
-let currentMonth = todayDate.getMonth();
+let currentMonth = todayDate.getMonth(); // 0~11
 let selectedDay = null;
 
 function renderCalendar(year, month) {
