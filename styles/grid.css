@@ -95,7 +95,7 @@
 	cursor: default;
 }
 
-#calendar-grid .day-number.today {
+#calendar-grid .day-number.today:has(.festival-holiday):not(.selected) {
 	background-color: #ffd6a5;
 	font-weight: bold;
 }
